@@ -1,7 +1,14 @@
 package com.project.pokemon.model.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Comments extends Timestamped {
 
