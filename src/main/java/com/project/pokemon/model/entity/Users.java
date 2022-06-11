@@ -20,8 +20,15 @@ public class Users {
     private String email;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String nickname;
 
     @Column(nullable = false)
     private String password;
+
+    public Users(String email, String nickname, String password) {
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+    }
+
 }
