@@ -1,5 +1,7 @@
 package com.project.pokemon.model.entity;
 
+import com.project.pokemon.model.dto.SignupDto;
+import com.project.pokemon.validator.UserValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +26,14 @@ public class Users {
 
     @Column(nullable = false)
     private String password;
+
+    public Users(SignupDto dto) {
+        UserValidator.validaterUsersInput(dto);
+
+        this.email = dto.getEmail();
+        this.nickname = dto.getNickname();
+        this.password = dto.getPassword();
+    }
 
     public Users(String email, String nickname, String password) {
         this.email = email;
