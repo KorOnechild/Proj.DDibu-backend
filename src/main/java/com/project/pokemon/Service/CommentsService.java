@@ -1,6 +1,6 @@
 package com.project.pokemon.Service;
 
-import com.project.pokemon.model.dto.CommentsDto;
+import com.project.pokemon.model.dto.requestDto.CommentsDto;
 import com.project.pokemon.model.repository.CommentsRepository;
 import com.project.pokemon.model.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.project.pokemon.model.dto;
+package com.project.pokemon.model.dto.requestDto;
 
 
 import lombok.Getter;

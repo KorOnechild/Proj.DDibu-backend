@@ -1,7 +1,7 @@
 package com.project.pokemon.Controller;
 
 import com.project.pokemon.Service.CommentsService;
-import com.project.pokemon.model.dto.CommentsDto;
+import com.project.pokemon.model.dto.requestDto.CommentsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
