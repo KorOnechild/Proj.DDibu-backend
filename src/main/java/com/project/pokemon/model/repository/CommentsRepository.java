@@ -1,4 +1,4 @@
 package com.project.pokemon.model.repository;
 
-public class CommentsRepository {
+public interface CommentsRepository {
 }

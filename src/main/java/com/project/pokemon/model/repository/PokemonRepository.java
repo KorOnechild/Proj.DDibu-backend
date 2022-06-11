@@ -1,4 +1,4 @@
 package com.project.pokemon.model.repository;
 
-public class PokemonRepository {
+public interface PokemonRepository {
 }
