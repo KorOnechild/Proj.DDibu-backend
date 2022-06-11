@@ -19,7 +19,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUSer(SignupDto dto) {
+    public void registerUser(SignupDto dto) {
         String email = dto.getEmail();
         String nickname = dto.getNickname();
         String password = dto.getPassword();
