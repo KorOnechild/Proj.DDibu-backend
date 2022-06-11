@@ -8,6 +8,8 @@ public class UserValidator {
 
     public static void validaterUsersInput(SignupDto dto) {
 
+        // TODO : 유효성 검사 테스트
+
         if (!Pattern.matches("^[a-zA-z0-9!@#$%^&*]$", dto.getPassword())) {
             try {
                 throw new IllegalAccessException("패스워드가 유효하지 않습니다.");
