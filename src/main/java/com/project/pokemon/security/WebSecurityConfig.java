@@ -11,11 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    // TODO : WebSecurityConfigurerAdapter 대신 구현하는 방법 알아내기
-
     @Bean
     public BCryptPasswordEncoder encodePassword() {
+
         return new BCryptPasswordEncoder();
     }
 
@@ -24,16 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .antMatchers("/images/**").permitAll()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/user/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
-
-                .antMatchers("/index/**").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/**").permitAll()
-                .antMatchers("*").permitAll()
-
+                .antMatchers("/", "/**", "*","/images/**", "/css/**", "/user/**", "/index/**").permitAll()
+                .antMatchers("/h2-console/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 // 로그인 기능
@@ -44,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 // 로그인 처리 후 실패 시 URL
                 .failureUrl("/user/login")
+                .failureForwardUrl("/403")
                 .permitAll()
                 .and()
                 .logout()
