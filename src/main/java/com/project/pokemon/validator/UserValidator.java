@@ -1,6 +1,6 @@
 package com.project.pokemon.validator;
 
-import com.project.pokemon.model.dto.SignupDto;
+import com.project.pokemon.model.dto.requestDto.SignupDto;
 
 import java.util.regex.Pattern;
 
