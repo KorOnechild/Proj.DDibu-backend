@@ -28,7 +28,7 @@ public class Users {
     private String password;
 
     public Users(SignupDto dto) {
-        UserValidator.validaterUsersInput(dto);
+        UserValidator.validatorUsersInput(dto);
 
         this.email = dto.getEmail();
         this.nickname = dto.getNickname();
