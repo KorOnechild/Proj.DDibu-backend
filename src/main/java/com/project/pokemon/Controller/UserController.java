@@ -1,7 +1,7 @@
 package com.project.pokemon.Controller;
 
 import com.project.pokemon.Service.UserService;
-import com.project.pokemon.model.dto.SignupDto;
+import com.project.pokemon.model.dto.requestDto.SignupDto;
 import com.project.pokemon.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
