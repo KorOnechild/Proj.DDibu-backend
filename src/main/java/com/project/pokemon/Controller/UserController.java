@@ -45,7 +45,6 @@ public class UserController {
     @ResponseBody
     @GetMapping("/user/emailDupCheck/{email}")
     public Boolean emailDupCheck(@PathVariable String email) {
-
         return userService.checkEmailDuplicate(email);
     }
 
