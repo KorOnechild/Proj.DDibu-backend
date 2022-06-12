@@ -3,11 +3,13 @@ package com.project.pokemon.Service;
 import com.project.pokemon.model.dto.requestDto.CommentsDto;
 import com.project.pokemon.model.dto.responseDto.CommentsListDto;
 import com.project.pokemon.model.entity.Comments;
+import com.project.pokemon.model.entity.Pokemon;
+import com.project.pokemon.model.entity.Users;
 import com.project.pokemon.model.repository.CommentsRepository;
 import com.project.pokemon.model.repository.PokemonRepository;
+import com.project.pokemon.model.repository.UserRepository;
+import com.project.pokemon.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,13 +22,22 @@ public class CommentsService {
 
     private final CommentsRepository commentsRepository;
     private final PokemonRepository pokemonRepository;
+    private final UserRepository userRepository;
 
     //댓글 작성 로직
-    public String createComments(CommentsDto commentsDto) {
-        pokemonRepository.findById(commentsDto.getPokemonId()).orElseThrow(
-                ()-> new IllegalArgumentException("해당 포켓몬이 없습니다.")
+    public String createComments(Long pokemonId,
+                                 CommentsDto commentsDto,
+                                 UserDetailsImpl userDetails) {
+
+        Pokemon pokemon = pokemonRepository.findById(pokemonId).orElseThrow(
+                () -> new IllegalArgumentException("해당 포켓몬이 없습니다.")
         );
-        commentsRepository.save(commentsDto);
+        Users user = userRepository.findById(userDetails.getId).orElseThrow(
+                () -> new NullPointerException("해당 유저가 존재하지 않습니다.")
+        );  //UserDetailsImpl작업 이후 수정 가능
+
+        Comments comments = new Comments(commentsDto, user, pokemon);
+        commentsRepository.save(comments);
         return "댓글이 작성되었습니다.";
     }
 
@@ -41,11 +52,22 @@ public class CommentsService {
     @Transactional
     public String updateComments(Long commentId, String newcomments) {
         Comments comments = commentsRepository.findById(commentId).orElseThrow(
-                ()-> new NullPointerException("해당 댓글이 없거나 삭제되었습니다.")
+                () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
         );
         comments.setComments(newcomments);
         commentsRepository.save(comments);
         return "댓글이 수정되었습니다.";
+    }
+
+    //댓글 삭제 로직
+    @Transactional
+    public String deleteComments(Long commentId) {
+        commentsRepository.findById(commentId).orElseThrow(
+                () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
+        );
+
+        commentsRepository.deleteById(commentId);
+        return "댓글이 삭제되었습니다.";
     }
 
 
@@ -55,7 +77,7 @@ public class CommentsService {
     private List<CommentsListDto> createResponse(List<Comments> commentsList) {
         List<CommentsListDto> commentsListDtos = new ArrayList<>();
 
-        for(Comments comments : commentsList){
+        for (Comments comments : commentsList) {
             CommentsListDto commentsListDto = new CommentsListDto();
             commentsListDto.setComments(comments.getComments());
             commentsListDto.setNickname(comments.getUsers().getNickname());
@@ -65,6 +87,4 @@ public class CommentsService {
 
         return commentsListDtos;
     }
-
-
 }
