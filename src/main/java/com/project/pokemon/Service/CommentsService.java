@@ -50,11 +50,11 @@ public class CommentsService {
 
     //댓글 수정 로직
     @Transactional
-    public String updateComments(Long commentId, String newcomments) {
+    public String updateComments(Long commentId, CommentsDto commentsDto) {
         Comments comments = commentsRepository.findById(commentId).orElseThrow(
                 () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
         );
-        comments.setComments(newcomments);
+        comments.setComments(commentsDto.getComments());
         commentsRepository.save(comments);
         return "댓글이 수정되었습니다.";
     }

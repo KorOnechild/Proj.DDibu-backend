@@ -3,6 +3,7 @@ package com.project.pokemon.Controller;
 import com.project.pokemon.Service.CommentsService;
 import com.project.pokemon.model.dto.requestDto.CommentsDto;
 import com.project.pokemon.model.dto.responseDto.CommentsListDto;
+import com.project.pokemon.model.entity.Comments;
 import com.project.pokemon.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +21,7 @@ public class CommentsController {
     //댓글 작성 API
     @PostMapping("comment/{pokemonId}")
     public String createComments(@PathVariable Long pokemonId,
-                                 CommentsDto commentsDto,
+                                 @RequestBody CommentsDto commentsDto,
                                  @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return commentsService.createComments(pokemonId, commentsDto, userDetails);
@@ -34,8 +35,9 @@ public class CommentsController {
 
     //댓글 수정 API
     @PatchMapping("/comment/{commentId}")
-    public String updateComments(@PathVariable Long commentId, String newcomments) {
-        return commentsService.updateComments(commentId, newcomments);
+    public String updateComments(@PathVariable Long commentId,
+                                 @RequestBody CommentsDto commentsDto) {
+        return commentsService.updateComments(commentId, commentsDto);
     }
 
     //댓글 삭제 API
