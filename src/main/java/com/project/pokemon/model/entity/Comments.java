@@ -1,5 +1,6 @@
 package com.project.pokemon.model.entity;
 
+import com.project.pokemon.model.dto.requestDto.CommentsDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,4 +27,10 @@ public class Comments extends Timestamped {
     @ManyToOne
     @JoinColumn(name = "pokemonId", nullable = false)
     private Pokemon pokemon;
+
+    public Comments(CommentsDto commentsDto, Users user, Pokemon pokemon) {
+        this.comments = commentsDto.getComments();
+        this.users = user;
+        this.pokemon = pokemon;
+    }
 }
