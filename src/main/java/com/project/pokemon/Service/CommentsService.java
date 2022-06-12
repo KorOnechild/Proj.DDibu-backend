@@ -50,24 +50,35 @@ public class CommentsService {
 
     //댓글 수정 로직
     @Transactional
-    public String updateComments(Long commentId, CommentsDto commentsDto) {
+    public String updateComments(Long commentId,
+                                 CommentsDto commentsDto,
+                                 UserDetailsImpl userDetails) {
         Comments comments = commentsRepository.findById(commentId).orElseThrow(
                 () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
         );
-        comments.setComments(commentsDto.getComments());
-        commentsRepository.save(comments);
-        return "댓글이 수정되었습니다.";
+
+        if(comments.getUsers().getId().equals(userDetails.getId())){
+            comments.setComments(commentsDto.getComments());
+            commentsRepository.save(comments);
+            return "댓글이 수정되었습니다.";
+        }else{
+            return "다른사람의 댓글입니다.";
+        }
     }
 
     //댓글 삭제 로직
     @Transactional
-    public String deleteComments(Long commentId) {
-        commentsRepository.findById(commentId).orElseThrow(
+    public String deleteComments(Long commentId, UserDetailsImpl userDetails) {
+        Comments comments = commentsRepository.findById(commentId).orElseThrow(
                 () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
         );
+        if(comments.getUsers().getId().equeals(userDetails.getId())){
+            commentsRepository.deleteById(commentId);
+            return "댓글이 삭제되었습니다.";
+        }else{
+            return "다른사람의 댓글입니다.";
+        }
 
-        commentsRepository.deleteById(commentId);
-        return "댓글이 삭제되었습니다.";
     }
 
 
