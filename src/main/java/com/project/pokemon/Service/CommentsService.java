@@ -32,7 +32,7 @@ public class CommentsService {
         Pokemon pokemon = pokemonRepository.findById(pokemonId).orElseThrow(
                 () -> new IllegalArgumentException("해당 포켓몬이 없습니다.")
         );
-        Users user = userRepository.findById(userDetails.getId).orElseThrow(
+        Users user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(
                 () -> new NullPointerException("해당 유저가 존재하지 않습니다.")
         );  //UserDetailsImpl작업 이후 수정 가능
 
@@ -57,7 +57,7 @@ public class CommentsService {
                 () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
         );
 
-        if(comments.getUsers().getId().equals(userDetails.getId())){
+        if(comments.getUsers().getId().equals(userDetails.getUser().getId())){
             comments.setComments(commentsDto.getComments());
             commentsRepository.save(comments);
             return "댓글이 수정되었습니다.";
@@ -72,7 +72,7 @@ public class CommentsService {
         Comments comments = commentsRepository.findById(commentId).orElseThrow(
                 () -> new NullPointerException("해당 댓글이 존재하지 않습니다.")
         );
-        if(comments.getUsers().getId().equeals(userDetails.getId())){
+        if(comments.getUsers().getId().equals(userDetails.getUser().getId())){
             commentsRepository.deleteById(commentId);
             return "댓글이 삭제되었습니다.";
         }else{
