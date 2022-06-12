@@ -28,6 +28,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	compileOnly 'org.springframework.security:spring-security-web:5.6.3'
+	compileOnly 'org.springframework.security:spring-security-config:5.6.3'
 }
 
 tasks.named('test') {
