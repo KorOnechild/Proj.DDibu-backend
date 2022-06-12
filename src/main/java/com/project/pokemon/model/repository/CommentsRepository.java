@@ -1,4 +1,10 @@
 package com.project.pokemon.model.repository;
 
-public interface CommentsRepository {
+import com.project.pokemon.model.entity.Comments;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface CommentsRepository extends JpaRepository<Comments, Long> {
+    List<Comments> findAllById(Long pokemonId);
 }
