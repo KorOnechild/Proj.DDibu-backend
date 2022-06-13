@@ -43,14 +43,14 @@ public class PokemonController {
     class DetailViewController {
 
         @GetMapping("/detail/{pokemonId}")
-        public String detail(Model model, @PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        public String detail(Model model, @PathVariable Long pokemonIdid, @AuthenticationPrincipal UserDetailsImpl userDetails) {
             if(Optional.ofNullable(userDetails).isPresent()){
                 model.addAttribute("nickname",userDetails.getNickname());
-                model.addAttribute("pokemon", pokemonRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지않는 포켓몬입니다")));
+                model.addAttribute("pokemon", pokemonRepository.findById(pokemonIdid).orElseThrow(() -> new IllegalArgumentException("존재하지않는 포켓몬입니다")));
             }
             else {
                 model.addAttribute("nickname","guest");
-                model.addAttribute("pokemon", pokemonRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지않는 포켓몬입니다")));
+                model.addAttribute("pokemon", pokemonRepository.findById(pokemonIdid).orElseThrow(() -> new IllegalArgumentException("존재하지않는 포켓몬입니다")));
             }
             return "detail";
         }
