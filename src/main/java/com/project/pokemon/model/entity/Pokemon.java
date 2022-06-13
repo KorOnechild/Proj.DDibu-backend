@@ -28,12 +28,16 @@ public class Pokemon {
     private String element;
 
     @Column
+    private String things;
+
+    @Column
     private Long likesCnt;
 
-    public Pokemon(String pokemonnum,String img, String pokemonname, String ele) {
+    public Pokemon(String pokemonnum,String img, String pokemonname, String ele,String ddesc) {
         this.name = pokemonname;
         this.imageUrl = img;
         this.num = pokemonnum;
         this.element = ele;
+        this.things= ddesc;
     }
 }

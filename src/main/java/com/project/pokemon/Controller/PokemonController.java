@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class PokemonController {
 
         @GetMapping("/")
         public List<Pokemon> main() {
-            return pokemonRepository.findAllByOrderByID();
+            return pokemonRepository.findAllByOrderById();
         }
 
         //디테일페이지 로드
@@ -41,6 +42,12 @@ public class PokemonController {
                      ()-> new IllegalArgumentException("존재하지않는 포켓몬입니다!")
              );
             }
+        }
+
+
+        @GetMapping("/data")
+        public String upload() throws IOException {
+            return pokemonService.data();
         }
 
     }
