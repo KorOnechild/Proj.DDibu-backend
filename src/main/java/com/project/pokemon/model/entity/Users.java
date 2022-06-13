@@ -27,13 +27,13 @@ public class Users {
     @Column(nullable = false)
     private String password;
 
-    public Users(SignupDto dto) {
-        UserValidator.validatorUsersInput(dto);
-
-        this.email = dto.getEmail();
-        this.nickname = dto.getNickname();
-        this.password = dto.getPassword();
-    }
+//    public Users(SignupDto dto) {
+//        UserValidator.validatorUsersInput(dto);
+//
+//        this.email = dto.getEmail();
+//        this.nickname = dto.getNickname();
+//        this.password = dto.getPassword();
+//    }
 
     public Users(String email, String nickname, String password) {
         this.email = email;
