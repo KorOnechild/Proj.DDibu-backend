@@ -43,7 +43,7 @@ public class CommentsService {
 
     //댓글 조회 로직
     public List<CommentsListDto> getComments(Long pokemonId) {
-        List<Comments> commentsList = commentsRepository.findAllById(pokemonId);
+        List<Comments> commentsList = commentsRepository.findAllByPokemonOrderByCreatedAtDesc(pokemonId);
 
         return createResponse(commentsList);
     }
