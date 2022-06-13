@@ -1,5 +1,6 @@
 package com.project.pokemon.Service;
 
+import com.project.pokemon.model.dto.ResponseDto;
 import com.project.pokemon.model.dto.SignupDto;
 import com.project.pokemon.model.entity.Users;
 import com.project.pokemon.model.repository.UserRepository;
@@ -22,22 +23,26 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUser(SignupDto Dto) {
-        // 회원 ID 중복 확인
+    public ResponseDto registerUser(SignupDto Dto) {
+        Boolean result = true;
+        String err_msg = "사용 가능한 ID 입니다.";
+        String email = Dto.getEmail();
         String nickname = Dto.getNickname();
-        Optional<Users> found = userRepository.findByNickname(nickname);
-        if (found.isPresent()) {
-            throw new IllegalArgumentException("중복된 사용자 닉네임이 존재합니다.");
+
+        Optional<Users> foundemail = userRepository.findByEmail(email);
+        Optional<Users> foundnickname = userRepository.findByNickname(nickname);
+
+        // 회원 ID 중복 확인
+        if (foundemail.isPresent()) {
+            err_msg = "중복된 사용자 ID가 존재합니다.";
+            result = false;
+            return new ResponseDto(result, err_msg, email);
         }
 
-        String email = Dto.getEmail();
-        Optional<Users> found2 = userRepository.findByEmail(email);
-        if (found2.isPresent()) {
-            try {
-                throw new IllegalAccessException("중복된 사용자 ID 가 존재합니다.");
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
+        if (foundnickname.isPresent()) {
+            err_msg = "중복된 닉네임이 존재합니다.";
+            result = false;
+            return new ResponseDto(result, err_msg, nickname);
         }
 
         // 패스워드 암호화
@@ -47,6 +52,9 @@ public class UserService {
         System.out.println(Dto.getEmail());
         System.out.println(Dto.getNickname());
         userRepository.save(user);
+
+        ResponseDto responseDto = new ResponseDto(result,err_msg,nickname);
+        return responseDto;
     }
 
     public Boolean checkEmailDuplicate(String email) {
