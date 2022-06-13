@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ResponseDto {
+public class ResponseDto { // 전달 값 dto
 
     private boolean result;
     private String err_msg;

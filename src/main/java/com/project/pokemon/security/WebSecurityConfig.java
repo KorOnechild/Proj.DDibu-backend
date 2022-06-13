@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").permitAll()
                 .anyRequest().permitAll();
 
-        http.formLogin().disable();
+        http.formLogin().disable(); // 폼로그인 비활성화
         http.addFilterAt(getAuthenticationFilter(), RestUsernamePasswordAuthenticationFilter.class);
 
         http.logout()
@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
-        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedOriginPattern("*"); // 배포 전 모두 허용
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

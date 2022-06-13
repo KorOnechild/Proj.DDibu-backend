@@ -17,7 +17,7 @@ public class RestLoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
 
-        response.setContentType("application/json");
+        response.setContentType("application/json"); // 컨텐츠 타입 json
         response.setCharacterEncoding("utf-8");
 
         ResponseDto responseDto = new ResponseDto();

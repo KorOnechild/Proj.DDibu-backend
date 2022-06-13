@@ -57,6 +57,7 @@ public class UserService {
         return responseDto;
     }
 
+    // Email 중복 확인
     public Boolean checkEmailDuplicate(String email) {
         Users user = userRepository.findByEmail(email).orElse(null);
 
@@ -70,6 +71,7 @@ public class UserService {
         return true;
     }
 
+    // 닉네임 중복 확인
     public Boolean checkNameDuplicate(String nickname) {
         Users user = userRepository.findByNickname(nickname).orElse(null);
 
