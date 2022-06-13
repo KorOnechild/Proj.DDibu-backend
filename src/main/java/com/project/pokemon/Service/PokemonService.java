@@ -51,12 +51,6 @@ public class PokemonService {
 
                         pokemonRepository.save(pokemon);
 
-                        System.out.println(pokemonnum);
-                        System.out.println(img);
-                        System.out.println(pokemonname);
-                        System.out.println(ddesc);
-                        System.out.println(ele);
-
 
                     }
                 }
@@ -66,11 +60,11 @@ public class PokemonService {
     }
 
     //검색기능
-    public Pokemon search(@RequestBody SearchDto searchDto) {
-        return pokemonRepository.findPokemonByName(searchDto);
+    public Pokemon search(SearchDto searchDto) {
+        return pokemonRepository.findPokemonByName(searchDto.getName());
     }
     //디테일페이지 로드
-    public Pokemon detail(@PathVariable Long pokemonIdid) {
+    public Pokemon detail( Long pokemonIdid) {
         return pokemonRepository.findById(pokemonIdid).orElseThrow(
                 ()-> new IllegalArgumentException("존재하지않는 포켓몬입니다!"));
 

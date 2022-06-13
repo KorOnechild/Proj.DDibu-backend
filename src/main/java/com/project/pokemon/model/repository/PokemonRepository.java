@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
     List<Pokemon> findAllByOrderById();
-    Pokemon findPokemonByName(SearchDto searchDto);
+    Pokemon findPokemonByName(String name);
 }
