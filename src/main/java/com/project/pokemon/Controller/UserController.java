@@ -45,12 +45,13 @@ public class UserController {
     @ResponseBody
     @GetMapping("/user/emailDupCheck/{email}")
     public Boolean emailDupCheck(@PathVariable String email) {
+
         return userService.checkEmailDuplicate(email);
     }
 
     @ResponseBody
     @GetMapping("/user/nameDupCheck/{nickname}")
-    public Boolean nameDupChck(@PathVariable String nickname) {
+    public Boolean nameDupCheck(@PathVariable String nickname) {
 
         return userService.checkNameDuplicate(nickname);
     }

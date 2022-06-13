@@ -21,6 +21,11 @@ public class UserDetailsImpl implements UserDetails {
         return user;
     }
 
+    public String getNickname() {
+
+        return user.getNickname();
+    }
+
     @Override
     public String getPassword() {
 
@@ -30,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
 
-        return user.getNickname();
+        return user.getEmail();
     }
 
     @Override
