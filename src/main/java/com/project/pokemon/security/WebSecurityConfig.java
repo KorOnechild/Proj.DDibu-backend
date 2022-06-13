@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.authorizeRequests()
                 .antMatchers("/", "/**", "*","/images/**", "/css/**", "/user/**", "/index/**").permitAll()
-                .antMatchers("/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // 로그인 기능
