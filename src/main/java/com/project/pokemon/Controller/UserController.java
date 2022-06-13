@@ -43,17 +43,16 @@ public class UserController {
     }
 
     @ResponseBody
-    @GetMapping("/user/emailDupCheck/{userid}")
-    public Boolean emailDupCheck(@PathVariable String userid) {
-
-        return userService.checkEmailDuplicate(userid);
+    @GetMapping("/user/emailDupCheck/{email}")
+    public Boolean emailDupCheck(@PathVariable String email) {
+        return userService.checkEmailDuplicate(email);
     }
 
     @ResponseBody
-    @GetMapping("/user/nameDupCheck/{userid}")
-    public Boolean nameDupChck(@PathVariable String userid) {
+    @GetMapping("/user/nameDupCheck/{nickname}")
+    public Boolean nameDupChck(@PathVariable String nickname) {
 
-        return userService.checkNameDuplicate(userid);
+        return userService.checkNameDuplicate(nickname);
     }
 
 }
