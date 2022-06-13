@@ -3,6 +3,7 @@ package com.project.pokemon.Controller;
 import com.project.pokemon.Service.PokemonService;
 import com.project.pokemon.model.entity.Pokemon;
 import com.project.pokemon.model.repository.PokemonRepository;
+import com.project.pokemon.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class PokemonController {
         public String main(Model model, @PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
             if(Optional.ofNullable(userDetails).isPresent()){
                 // nickname 값에 닉네임을 할당해줍니다, 게스트는 guest로 할당
-                model.addAttribute("nickname",userDetails.getNickname());
+                model.addAttribute("nickname",userDetails.getUsername());
             }
             else {
                 model.addAttribute("nickname","guest");
@@ -45,7 +46,7 @@ public class PokemonController {
         @GetMapping("/detail/{pokemonId}")
         public String detail(Model model, @PathVariable Long pokemonIdid, @AuthenticationPrincipal UserDetailsImpl userDetails) {
             if(Optional.ofNullable(userDetails).isPresent()){
-                model.addAttribute("nickname",userDetails.getNickname());
+                model.addAttribute("nickname",userDetails.getUsername());
                 model.addAttribute("pokemon", pokemonRepository.findById(pokemonIdid).orElseThrow(() -> new IllegalArgumentException("존재하지않는 포켓몬입니다")));
             }
             else {
