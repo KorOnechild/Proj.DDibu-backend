@@ -27,7 +27,7 @@ public class PokemonController {
     class MainViewController {
 
         @GetMapping("/")
-        public List<Pokemon> main(Model model, @PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        public List<Pokemon> main() {
             return pokemonRepository.findAllByOrderByID();
         }
 
@@ -36,8 +36,10 @@ public class PokemonController {
         class DetailViewController {
 
             @GetMapping("/detail/{pokemonId}")
-            public List<Pokemon> detail(Model model, @PathVariable Long pokemonIdid, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-             return pokemonRepository.findById(pokemonIdid);
+            public Pokemon detail(@PathVariable Long pokemonIdid) {
+             return pokemonRepository.findById(pokemonIdid).orElseThrow(
+                     ()-> new IllegalArgumentException("존재하지않는 포켓몬입니다!")
+             );
             }
         }
 
