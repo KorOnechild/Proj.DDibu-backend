@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface PokemonRepository {
     List<Pokemon> findAllByOrderByID();
 
-    <T> Optional<T> findById(Long id);
+    List<Pokemon>findById(Long id);
 }

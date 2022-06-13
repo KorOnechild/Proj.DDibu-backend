@@ -27,38 +27,19 @@ public class PokemonController {
     class MainViewController {
 
         @GetMapping("/")
-        public String main(Model model, @PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-            if(Optional.ofNullable(userDetails).isPresent()){
-                // nickname 값에 닉네임을 할당해줍니다, 게스트는 guest로 할당
-                model.addAttribute("nickname",userDetails.getUsername());
-            }
-            else {
-                model.addAttribute("nickname","guest");
-            }
-            return "index";
+        public List<Pokemon> main(Model model, @PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            return pokemonRepository.findAllByOrderByID();
         }
-    }
 
-    //디테일페이지 로드
-    @Controller
-    class DetailViewController {
+        //디테일페이지 로드
+        @Controller
+        class DetailViewController {
 
-        @GetMapping("/detail/{pokemonId}")
-        public String detail(Model model, @PathVariable Long pokemonIdid, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-            if(Optional.ofNullable(userDetails).isPresent()){
-                model.addAttribute("nickname",userDetails.getUsername());
-                model.addAttribute("pokemon", pokemonRepository.findById(pokemonIdid).orElseThrow(() -> new IllegalArgumentException("존재하지않는 포켓몬입니다")));
+            @GetMapping("/detail/{pokemonId}")
+            public List<Pokemon> detail(Model model, @PathVariable Long pokemonIdid, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+             return pokemonRepository.findById(pokemonIdid);
             }
-            else {
-                model.addAttribute("nickname","guest");
-                model.addAttribute("pokemon", pokemonRepository.findById(pokemonIdid).orElseThrow(() -> new IllegalArgumentException("존재하지않는 포켓몬입니다")));
-            }
-            return "detail";
         }
-    }
 
-    @GetMapping("/")
-    public List<Pokemon> readPokemon() {
-        return pokemonRepository.findAllByOrderByID();
     }
 }
