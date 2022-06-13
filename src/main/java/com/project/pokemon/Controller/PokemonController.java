@@ -1,6 +1,7 @@
 package com.project.pokemon.Controller;
 
 import com.project.pokemon.Service.PokemonService;
+import com.project.pokemon.model.dto.requestDto.SearchDto;
 import com.project.pokemon.model.entity.Pokemon;
 import com.project.pokemon.model.repository.PokemonRepository;
 import com.project.pokemon.security.UserDetailsImpl;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -29,7 +31,7 @@ public class PokemonController {
 
         @GetMapping("/")
         public List<Pokemon> main() {
-            return pokemonRepository.findAllByOrderById();
+            return pokemonService.load();
         }
 
         //디테일페이지 로드
@@ -38,17 +40,20 @@ public class PokemonController {
 
             @GetMapping("/detail/{pokemonId}")
             public Pokemon detail(@PathVariable Long pokemonIdid) {
-             return pokemonRepository.findById(pokemonIdid).orElseThrow(
-                     ()-> new IllegalArgumentException("존재하지않는 포켓몬입니다!")
-             );
+             return pokemonService.detail(pokemonIdid);
             }
         }
-
-
+        //포켓몬 크롤링
         @GetMapping("/data")
         public String upload() throws IOException {
             return pokemonService.data();
         }
+        // 포켓몬 검색기능
+        @GetMapping("/search")
+        public Pokemon search(@RequestBody SearchDto searchDto) {
+            return pokemonService.search(searchDto);
 
+
+        }
     }
 }
