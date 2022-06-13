@@ -29,7 +29,7 @@ public class CommentsService {
                                  CommentsDto commentsDto,
                                  UserDetailsImpl userDetails) {
 
-        Pokemon pokemon = pokemonRepository.findById(pokemonId).orElseThrow(
+        Pokemon pokemon = (Pokemon) pokemonRepository.findById(pokemonId).orElseThrow(
                 () -> new IllegalArgumentException("해당 포켓몬이 없습니다.")
         );
         Users user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(
