@@ -4,16 +4,12 @@ import com.project.pokemon.Service.PokemonService;
 import com.project.pokemon.model.dto.requestDto.SearchDto;
 import com.project.pokemon.model.entity.Pokemon;
 import com.project.pokemon.model.repository.PokemonRepository;
-import com.project.pokemon.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
