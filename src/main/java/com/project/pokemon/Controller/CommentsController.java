@@ -18,7 +18,7 @@ public class CommentsController {
     private final CommentsService commentsService;
 
     //댓글 작성 API
-    @PostMapping("comment/{pokemonId}")
+    @PostMapping("/comment/{pokemonId}")
     public String createComments(@PathVariable Long pokemonId,
                                  @RequestBody CommentsDto commentsDto,
                                  @AuthenticationPrincipal UserDetailsImpl userDetails) {
