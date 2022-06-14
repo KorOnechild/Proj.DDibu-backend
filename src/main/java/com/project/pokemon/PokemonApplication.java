@@ -15,9 +15,4 @@ public class PokemonApplication {
 		SpringApplication.run(PokemonApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
 }

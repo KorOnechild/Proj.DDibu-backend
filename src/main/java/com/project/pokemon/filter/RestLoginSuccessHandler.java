@@ -39,7 +39,7 @@ public class RestLoginSuccessHandler implements AuthenticationSuccessHandler {
                 responseDto.setErr_msg("없는 회원입니다.");
             } else {
                 responseDto.setResult(true);
-                responseDto.setNickname(user.getNickname());
+                responseDto.setEmail(user.getEmail());
             }
         }
 

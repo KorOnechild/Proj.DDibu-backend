@@ -4,23 +4,18 @@ import com.project.pokemon.model.dto.requestDto.SignupDto;
 import com.project.pokemon.model.dto.responseDto.ResponseDto;
 import com.project.pokemon.model.entity.Users;
 import com.project.pokemon.model.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public ResponseDto registerUser(SignupDto Dto) {
         Boolean result = true;

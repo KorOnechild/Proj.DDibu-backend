@@ -60,12 +60,12 @@ public class PokemonService {
     }
 
     //검색기능
-    public Pokemon search(SearchDto searchDto) {
+    public List<Pokemon> search(SearchDto searchDto) {
         return pokemonRepository.findPokemonByName(searchDto.getName());
     }
     //디테일페이지 로드
-    public Pokemon detail( Long pokemonIdid) {
-        return pokemonRepository.findById(pokemonIdid).orElseThrow(
+    public Pokemon detail( Long pokemonId) {
+        return pokemonRepository.findById(pokemonId).orElseThrow(
                 ()-> new IllegalArgumentException("존재하지않는 포켓몬입니다!"));
 
     }

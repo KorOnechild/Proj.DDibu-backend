@@ -22,7 +22,7 @@ public class RestUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
         UsernamePasswordAuthenticationToken authenticationToken;
         if (request.getContentType().equals(MimeTypeUtils.APPLICATION_JSON_VALUE)) {
             try {
-                AuthenticationDto authenticationDto = objectMapper.readValue(request.getReader().lines().collect(Collectors.joining()), AuthenticationDto.class );
+                AuthenticationDto authenticationDto = objectMapper.readValue(request.getReader().lines().collect(Collectors.joining()), AuthenticationDto.class);
                 authenticationToken = new UsernamePasswordAuthenticationToken(authenticationDto.getEmail(), authenticationDto.getPassword());
             } catch (IOException e) {
                 e.printStackTrace();

@@ -11,12 +11,12 @@ public class ResponseDto { // 전달 값 dto
 
     private boolean result;
     private String err_msg;
-    private String nickname;
+    private String email;
 
-    public ResponseDto(Boolean result, String err_msg, String nickname) {
+    public ResponseDto(Boolean result, String err_msg, String email) {
         this.result = result;
         this.err_msg = err_msg;
-        this.nickname = nickname;
+        this.email = email;
     }
 
     public ResponseDto(Boolean result) {
@@ -24,15 +24,15 @@ public class ResponseDto { // 전달 값 dto
         this.result = result;
     }
 
-    public ResponseDto(String nickname, Boolean result) {
+    public ResponseDto(String email, Boolean result) {
 
-        this.nickname = nickname;
+        this.email = email;
         this.result = result;
     }
 
-    public ResponseDto(String nickname) {
+    public ResponseDto(String email) {
 
-        this.nickname = nickname;
+        this.email = email;
     }
 
 }
