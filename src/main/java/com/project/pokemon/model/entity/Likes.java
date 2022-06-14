@@ -1,9 +1,15 @@
 package com.project.pokemon.model.entity;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
-public class Like {
+public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +22,7 @@ public class Like {
     @JoinColumn(name = "pokemonId")
     private Pokemon pokemon;
 
-    public Like(Users user, Pokemon pokemon){
+    public Likes(Users user, Pokemon pokemon){
         this.user = user;
         this.pokemon = pokemon;
     }

@@ -1,6 +1,6 @@
-package com.project.pokemon.Service;
+package com.project.pokemon.security.Service;
 
-import com.project.pokemon.model.entity.Like;
+import com.project.pokemon.model.entity.Likes;
 import com.project.pokemon.model.entity.Pokemon;
 import com.project.pokemon.model.entity.Users;
 import com.project.pokemon.model.repository.LikeRepository;
@@ -27,7 +27,7 @@ public class LikeService {
                 () -> new IllegalArgumentException("해당 포켓몬이 존재하지 않습니다.")
         );
 
-        Like like = new Like(user, pokemon);
+        Likes like = new Likes(user, pokemon);
 
         if(behavior.equals("like")){
             likeRepository.save(like);

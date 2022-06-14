@@ -1,6 +1,6 @@
 package com.project.pokemon.Controller;
 
-import com.project.pokemon.Service.CommentsService;
+import com.project.pokemon.security.Service.CommentsService;
 import com.project.pokemon.model.dto.requestDto.CommentsDto;
 import com.project.pokemon.model.dto.responseDto.CommentsListDto;
 import com.project.pokemon.security.UserDetailsImpl;
