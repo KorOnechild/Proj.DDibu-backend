@@ -26,6 +26,7 @@ public class PokemonController {
     @Controller
     class MainViewController {
 
+        @ResponseBody
         @GetMapping("/")
         public List<Pokemon> main() {
             return pokemonService.load();
@@ -34,10 +35,10 @@ public class PokemonController {
         //디테일페이지 로드
         @Controller
         class DetailViewController {
-
+            @ResponseBody
             @GetMapping("/detail/{pokemonId}")
-            public Pokemon detail(@PathVariable Long pokemonIdid) {
-             return pokemonService.detail(pokemonIdid);
+            public Pokemon detail(@PathVariable Long pokemonId) {
+             return pokemonService.detail(pokemonId);
             }
         }
         //포켓몬 크롤링
@@ -48,7 +49,7 @@ public class PokemonController {
         // 포켓몬 검색기능
         @ResponseBody
         @PostMapping("/search")
-        public Pokemon search(@RequestBody SearchDto searchDto) {
+        public List<Pokemon> search(@RequestBody SearchDto searchDto) {
             return pokemonService.search(searchDto);
 
 
