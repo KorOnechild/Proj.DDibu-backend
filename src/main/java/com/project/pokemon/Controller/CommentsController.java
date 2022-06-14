@@ -1,9 +1,9 @@
 package com.project.pokemon.Controller;
 
-import com.project.pokemon.Service.CommentsService;
 import com.project.pokemon.model.TokenDecode;
 import com.project.pokemon.model.dto.requestDto.CommentsDto;
 import com.project.pokemon.model.dto.responseDto.CommentsListDto;
+import com.project.pokemon.Service.CommentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

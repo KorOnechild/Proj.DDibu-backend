@@ -1,6 +1,6 @@
 package com.project.pokemon.Controller;
 
-import com.project.pokemon.Service.PokemonService;
+import com.project.pokemon.security.Service.PokemonService;
 import com.project.pokemon.model.dto.requestDto.SearchDto;
 import com.project.pokemon.model.entity.Pokemon;
 import com.project.pokemon.model.repository.PokemonRepository;
