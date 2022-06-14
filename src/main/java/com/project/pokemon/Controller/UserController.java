@@ -42,15 +42,18 @@ public class UserController {
         return "success";
     }
 
+    // email 중복 확인
     @ResponseBody
     @GetMapping("/user/emailDupCheck/{email}")
     public Boolean emailDupCheck(@PathVariable String email) {
+
         return userService.checkEmailDuplicate(email);
     }
 
+    // 닉네임 중복 확인
     @ResponseBody
     @GetMapping("/user/nameDupCheck/{nickname}")
-    public Boolean nameDupChck(@PathVariable String nickname) {
+    public Boolean nameDupCheck(@PathVariable String nickname) {
 
         return userService.checkNameDuplicate(nickname);
     }

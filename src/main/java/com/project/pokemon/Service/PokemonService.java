@@ -1,6 +1,7 @@
 package com.project.pokemon.Service;
 
 
+import com.project.pokemon.model.dto.requestDto.SearchDto;
 import com.project.pokemon.model.entity.Pokemon;
 import com.project.pokemon.model.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,7 +24,7 @@ public class PokemonService {
 
     private final PokemonRepository pokemonRepository;
 
-
+    //크롤링
     public String data() throws IOException {
 
         for(int i =1; i <209 ; i++){
@@ -48,18 +51,27 @@ public class PokemonService {
 
                         pokemonRepository.save(pokemon);
 
-                        System.out.println(pokemonnum);
-                        System.out.println(img);
-                        System.out.println(pokemonname);
-                        System.out.println(ddesc);
-                        System.out.println(ele);
-
 
                     }
                 }
             }
         }
         return "업로드완료";
+    }
+
+    //검색기능
+    public Pokemon search(SearchDto searchDto) {
+        return pokemonRepository.findPokemonByName(searchDto.getName());
+    }
+    //디테일페이지 로드
+    public Pokemon detail( Long pokemonIdid) {
+        return pokemonRepository.findById(pokemonIdid).orElseThrow(
+                ()-> new IllegalArgumentException("존재하지않는 포켓몬입니다!"));
+
+    }
+    //메인페이지 로드
+    public List<Pokemon> load() {
+        return pokemonRepository.findAllByOrderById();
     }
 }
 

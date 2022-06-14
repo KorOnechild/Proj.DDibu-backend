@@ -18,7 +18,7 @@ public class Users {
     @Id
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true) //nullable == null 값 받지 않음, unique == 허용하지않음 [false = 허용됨]
     private String email;
 
     @Column(nullable = false, unique = true)
