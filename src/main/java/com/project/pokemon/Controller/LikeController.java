@@ -1,7 +1,7 @@
 package com.project.pokemon.Controller;
 
 import com.project.pokemon.model.dto.requestDto.LikeDto;
-import com.project.pokemon.security.Service.LikeService;
+import com.project.pokemon.Service.LikeService;
 import com.project.pokemon.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

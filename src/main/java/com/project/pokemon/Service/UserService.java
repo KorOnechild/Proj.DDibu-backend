@@ -1,4 +1,4 @@
-package com.project.pokemon.security.Service;
+package com.project.pokemon.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
