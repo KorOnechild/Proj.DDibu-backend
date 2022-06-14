@@ -20,7 +20,7 @@ public class RestUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         UsernamePasswordAuthenticationToken authenticationToken;
-        if (request.getContentType().equals(MimeTypeUtils.APPLICATION_JSON_VALUE)) {
+        if (request.getContentType().equals(MimeTypeUtils.APPLICATION_JSON_VALUE)) {    //요청 Contents-type이 json인지 확인하고 인증 토큰 생성
             try {
                 AuthenticationDto authenticationDto = objectMapper.readValue(request.getReader().lines().collect(Collectors.joining()), AuthenticationDto.class);
                 authenticationToken = new UsernamePasswordAuthenticationToken(authenticationDto.getEmail(), authenticationDto.getPassword());

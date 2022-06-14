@@ -1,4 +1,4 @@
-package com.project.pokemon.validator;
+package com.project.pokemon.Controller.validator;
 
 public class CommentsValidator {
 }

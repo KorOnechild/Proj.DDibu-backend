@@ -1,7 +1,5 @@
 package com.project.pokemon.model.entity;
 
-import com.project.pokemon.model.dto.requestDto.SignupDto;
-import com.project.pokemon.validator.UserValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
