@@ -1,13 +1,18 @@
 package com.project.pokemon.Controller;
 
 import com.project.pokemon.Service.UserService;
+import com.project.pokemon.model.dto.requestDto.SignInDto;
 import com.project.pokemon.model.dto.requestDto.SignupDto;
+import com.project.pokemon.model.dto.responseDto.UserLoginRespDto;
+import com.project.pokemon.model.dto.responseDto.UserRegisterRespDto;
+import com.project.pokemon.model.dto.responseDto.UserTokenRespDto;
 import com.project.pokemon.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.security.NoSuchAlgorithmException;
+
+@RestController
 public class UserController {
 
     private final UserService userService;
@@ -20,11 +25,27 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+    // 토큰 테스트
+    @GetMapping("/user/tokentest")
+    public UserTokenRespDto tokenTest(@RequestHeader("Authorization") String authorization) {
+        if(!authorization.startsWith("Bearer "))
+            return new UserTokenRespDto(false, "토큰 인증 방식이 Bearer 가 아닙니다.");
+
+        String token = authorization.substring(7, authorization.length() - 1);
+
+        return userService.tokenTest(token);
+    }
+
     // 회원 로그인 페이지
     @GetMapping("/user/login")
     public String login() {
-
         return "login";
+    }
+
+    @PostMapping("/user/login")
+    public UserLoginRespDto login(@RequestBody SignInDto Dto) throws NoSuchAlgorithmException {
+
+        return  userService.loginUser(Dto);
     }
 
     // 회원가입 페이지
@@ -36,10 +57,8 @@ public class UserController {
 
     // 회원 가입 요청 처리
     @PostMapping("/user/signup")
-    public String registerUser(@RequestBody SignupDto Dto) {
-
-        userService.registerUser(Dto);
-        return "success";
+    public UserRegisterRespDto registerUser(@RequestBody SignupDto Dto) throws NoSuchAlgorithmException {
+        return userService.registerUser(Dto);
     }
 
     // email 중복 확인
