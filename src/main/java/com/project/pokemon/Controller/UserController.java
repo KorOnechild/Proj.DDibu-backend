@@ -1,12 +1,11 @@
 package com.project.pokemon.Controller;
 
+import com.project.pokemon.Service.UserService;
 import com.project.pokemon.model.dto.requestDto.SignInDto;
 import com.project.pokemon.model.dto.requestDto.SignupDto;
 import com.project.pokemon.model.dto.responseDto.UserLoginRespDto;
 import com.project.pokemon.model.dto.responseDto.UserRegisterRespDto;
 import com.project.pokemon.model.dto.responseDto.UserTokenRespDto;
-import com.project.pokemon.model.repository.UserRepository;
-import com.project.pokemon.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +15,11 @@ import java.security.NoSuchAlgorithmException;
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService) {
 
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
     // 토큰 테스트

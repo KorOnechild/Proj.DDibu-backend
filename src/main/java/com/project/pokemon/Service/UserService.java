@@ -14,11 +14,9 @@ import com.project.pokemon.model.entity.Users;
 import com.project.pokemon.model.repository.UserRepository;
 import com.project.pokemon.security.SHA256;
 import lombok.RequiredArgsConstructor;
-// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.Optional;
 
 @RequiredArgsConstructor
