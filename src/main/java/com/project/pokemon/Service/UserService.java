@@ -148,7 +148,7 @@ public class UserService {
         String errMsg = "로그인 성공";
 
         String email = Dto.getEmail();
-        String pw = Dto.getPassword();
+        String pw = Dto.getPw();
         String pwSHA256 = SHA256.encrypt(pw);
 
         Optional<Users> user = userRepository.findByEmailAndPassword(email, pwSHA256);
@@ -186,7 +186,7 @@ public class UserService {
         }
 
         // 패스워드 암호화
-        String password = SHA256.encrypt(Dto.getPassword());
+        String password = SHA256.encrypt(Dto.getPw());
 
         Users user = new Users(email, nickname, password);
         System.out.println(Dto.getEmail());
