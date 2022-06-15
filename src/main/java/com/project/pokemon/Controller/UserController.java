@@ -1,6 +1,7 @@
 package com.project.pokemon.Controller;
 
 import com.project.pokemon.Service.UserService;
+import com.project.pokemon.model.dto.requestDto.RefreshTokenDto;
 import com.project.pokemon.model.dto.requestDto.SignInDto;
 import com.project.pokemon.model.dto.requestDto.SignupDto;
 import com.project.pokemon.model.dto.responseDto.UserLoginRespDto;
@@ -32,6 +33,14 @@ public class UserController {
 
         return userService.tokenTest(token);
     }
+
+
+    // 토큰 재발급 받을때 사용
+    @PostMapping("/user/refresh")
+    public UserLoginRespDto tokenRefresh(@RequestBody RefreshTokenDto Dto) {
+        return userService.verifyRefreshToken(Dto.getAccessToken(), Dto.getRefreshToken());
+    }
+
 
     // 회원 로그인 페이지
     @GetMapping("/user/login")
