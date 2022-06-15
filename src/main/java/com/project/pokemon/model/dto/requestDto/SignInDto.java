@@ -9,5 +9,5 @@ import lombok.Setter;
 @Getter
 public class SignInDto {
     private String email;
-    private String password;
+    private String pw;
 }
