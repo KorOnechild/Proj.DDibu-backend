@@ -36,6 +36,7 @@ public class UserController {
     // 회원 로그인 페이지
     @GetMapping("/user/login")
     public String login() {
+        
         return "login";
     }
 
@@ -55,6 +56,7 @@ public class UserController {
     // 회원 가입 요청 처리
     @PostMapping("/user/signup")
     public UserRegisterRespDto registerUser(@RequestBody SignupDto Dto) throws NoSuchAlgorithmException {
+
         return userService.registerUser(Dto);
     }
 

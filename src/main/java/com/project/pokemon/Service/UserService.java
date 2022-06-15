@@ -81,7 +81,7 @@ public class UserService {
 
     public UserRegisterRespDto registerUser(SignupDto Dto) throws NoSuchAlgorithmException {
         Boolean result = true;
-        String err_msg = "회원가입 성공 했다 이자식ㄷ아 ";
+        String err_msg = "회원가입 성공";
         String email = Dto.getEmail();
         String nickname = Dto.getNickname();
 
