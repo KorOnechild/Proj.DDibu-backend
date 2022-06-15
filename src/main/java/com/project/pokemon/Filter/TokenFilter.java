@@ -60,6 +60,39 @@ public class TokenFilter implements Filter {
             }
         }
 
+        if(url.startsWith("/like")) {
+            String authorization = httpRequest.getHeader("Authorization");
+
+            if(authorization == null || !authorization.startsWith("Bearer ")) {
+                // 에러 나는 부분
+                tokenRespDto  = new UserTokenRespDto(false, "토큰이 유효하지 않습니다.");
+            }
+
+            if(tokenRespDto == null) {
+                // 인증 성공 한 부분
+                String token = authorization.substring(7);
+
+                DecodedJWT jwt = null;
+
+                try {
+                    Algorithm algorithm = Algorithm.HMAC256("rlaalswnrkgoTdma"); //use more secure key
+                    JWTVerifier verifier = JWT.require(algorithm)
+                            .withIssuer("gkdgo99")
+                            .build(); //Reusable verifier instance
+
+                    jwt = verifier.verify(token);
+
+                    TokenDecode tokenDecode = new TokenDecode(jwt);
+                    httpRequest.setAttribute("decode", tokenDecode);
+                } catch (JWTVerificationException exception){
+                    exception.printStackTrace();
+                    System.out.println(exception.fillInStackTrace());
+                    System.out.println(exception);
+                    tokenRespDto  = new UserTokenRespDto(false, "토큰 인증 에러");
+                }
+            }
+        }
+
         if(tokenRespDto != null) {
             httpResponse.setContentType("application/json");
             httpResponse.setCharacterEncoding("utf-8");
