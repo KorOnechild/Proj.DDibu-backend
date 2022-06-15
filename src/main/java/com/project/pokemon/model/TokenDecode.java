@@ -10,7 +10,7 @@ public class TokenDecode {
     String token;
     String email;
     String nickname;
-    Long id;;
+    Long id;
 
     public TokenDecode(DecodedJWT jwt) {
         this.token = jwt.getToken();
