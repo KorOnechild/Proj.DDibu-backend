@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 public class TokenDecode {
     String token;
-    String email;;
-    String nickname;;
-    Long id;;
+    String email;
+    String nickname;
+    Long id;
 
     public TokenDecode(DecodedJWT jwt) {
         this.token = jwt.getToken();
