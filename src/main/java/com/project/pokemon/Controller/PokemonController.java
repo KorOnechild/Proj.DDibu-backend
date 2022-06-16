@@ -3,7 +3,6 @@ package com.project.pokemon.Controller;
 import com.project.pokemon.Service.PokemonService;
 import com.project.pokemon.model.dto.requestDto.SearchDto;
 import com.project.pokemon.model.entity.Pokemon;
-import com.project.pokemon.model.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import java.util.List;
 @RestController
 public class PokemonController {
 
-    private final PokemonRepository pokemonRepository;
     private final PokemonService pokemonService;
 
     //메인페이지 로드
