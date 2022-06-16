@@ -1,6 +1,6 @@
 package com.project.pokemon.Controller;
 
-import com.project.pokemon.Service.LikeService;
+import com.project.pokemon.Controller.Service.LikeService;
 import com.project.pokemon.model.TokenDecode;
 import com.project.pokemon.model.dto.requestDto.LikeDto;
 import lombok.RequiredArgsConstructor;

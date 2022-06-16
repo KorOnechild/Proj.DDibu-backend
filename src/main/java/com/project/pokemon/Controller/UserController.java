@@ -1,6 +1,6 @@
 package com.project.pokemon.Controller;
 
-import com.project.pokemon.Service.UserService;
+import com.project.pokemon.Controller.Service.UserService;
 import com.project.pokemon.model.dto.requestDto.RefreshTokenDto;
 import com.project.pokemon.model.dto.requestDto.SignInDto;
 import com.project.pokemon.model.dto.requestDto.SignupDto;

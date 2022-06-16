@@ -1,4 +1,4 @@
-package com.project.pokemon.Service;
+package com.project.pokemon.Controller.Service;
 
 
 import com.project.pokemon.model.dto.requestDto.SearchDto;
