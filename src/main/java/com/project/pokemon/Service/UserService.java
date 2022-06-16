@@ -89,7 +89,7 @@ public class UserService {
         DecodedJWT refresh_decode = null;
 
         // 리프레시 토큰은 만료기한 여부 등 인증 과정을 거침
-            try {
+        try {
             Algorithm algorithm = Algorithm.HMAC256("rlaalswnrkgoTdma"); //use more secure key
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer("gkdgo99")
