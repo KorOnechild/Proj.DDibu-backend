@@ -49,6 +49,7 @@ public class UserController {
         return "login";
     }
 
+    // 로그인 요청 처리
     @PostMapping("/user/login")
     public UserLoginRespDto login(@RequestBody SignInDto Dto) throws NoSuchAlgorithmException {
 
