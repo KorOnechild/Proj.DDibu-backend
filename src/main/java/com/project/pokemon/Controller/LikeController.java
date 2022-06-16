@@ -4,10 +4,7 @@ import com.project.pokemon.Service.LikeService;
 import com.project.pokemon.model.TokenDecode;
 import com.project.pokemon.model.dto.requestDto.LikeDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,5 +20,13 @@ public class LikeController {
                        @RequestBody LikeDto behavior){
         TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
         likeService.uplike(decode, pokemonId, behavior);
+    }
+
+    @GetMapping("viewlikes/{pokemonId}")
+    public boolean getlike(@PathVariable Long pokemonId,
+                           HttpServletRequest httpRequest){
+        TokenDecode decode = (TokenDecode) httpRequest.getAttribute("decode");
+
+        return likeService.getLike(pokemonId, decode);
     }
 }

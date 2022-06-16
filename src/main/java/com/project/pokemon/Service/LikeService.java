@@ -43,4 +43,17 @@ public class LikeService {
         Long count = (long) likeRepository.findAllByPokemon(pokemon).size();
         pokemon.setLikesCnt(count);
     }
+
+    //해당 게시글 유저의 좋아요 유무 전달
+    public boolean getLike(Long pokemonId, TokenDecode decode) {
+        Pokemon pokemon = pokemonRepository.findById(pokemonId).orElseThrow(
+                ()-> new NullPointerException("해당 포켓몬이 없습니다.")
+        );
+
+        Users user = userRepository.findById(decode.getId()).orElseThrow(
+                ()-> new NullPointerException("해당 유저가 존재하지 않습니다.")
+        );
+
+        return likeRepository.existsByPokemonAndUser(pokemon, user);
+    }
 }

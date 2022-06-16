@@ -17,7 +17,7 @@ public class CommentsController {
     private final CommentsService commentsService;
 
     //댓글 조회 API
-    @GetMapping("/comment/{pokemonId}")
+    @GetMapping("/viewcomments/{pokemonId}")
     public List<CommentsListDto> getComments(@PathVariable Long pokemonId) {
         return commentsService.getComments(pokemonId);
     }
