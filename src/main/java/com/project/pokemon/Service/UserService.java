@@ -36,12 +36,12 @@ public class UserService {
 
         try {
             // secret 키 노출되면 안돼서, secret.json 파일로 빼서 gitignore 파일에 secret.json 을 추가하는 식으로 막음
-            // 테스트니까 그냥 아무 키 값 사용 하였음
+            // 테스트니까 그냥 아무 키 값 사용 / TokenFilter 와 동일한 시크릿 키, 발급자여야 함.
             Algorithm algorithm = Algorithm.HMAC256("rlaalswnrkgoTdma");
             token = JWT.create()
-                    .withIssuer("gkdgo99")
-                    .withIssuedAt(now)
-                    .withExpiresAt(expireDate)
+                    .withIssuer("gkdgo99") // 발급자
+                    .withIssuedAt(now) // 생성시간
+                    .withExpiresAt(expireDate) // 만료기간
                     .sign(algorithm);
         } catch (JWTCreationException exception){
             return "";
@@ -53,8 +53,8 @@ public class UserService {
     public UserLoginRespDto generateToken(Long id, String email, String nickname) {
         String token = "";
         Date now = new Date();
-        Date expireDate = new Date(System.currentTimeMillis() + (1000L * 3600L * 24L * 7L));
-        Date refreshExpireDate = new Date(System.currentTimeMillis() + (1000L * 3600L * 24L * 30L));
+        Date expireDate = new Date(System.currentTimeMillis() + (1000L * 3600L * 24L * 7L)); // 7일
+        Date refreshExpireDate = new Date(System.currentTimeMillis() + (1000L * 3600L * 24L * 30L)); // 30일
 
         // 일반적으로 엑세스 토큰보다 리프레시 토큰 수명 주기가 더 길어야 함
         // 엑세스 토큰은 7일, 리프레시 토큰은 30일
@@ -64,8 +64,6 @@ public class UserService {
             return new UserLoginRespDto(false, "리프레시 토큰 생성에 실패 하였습니다.");
 
         try {
-            // secret 키 노출되면 안돼서, secret.json 파일로 빼서 gitignore 파일에 secret.json 을 추가하는 식으로 막음
-            // 테스트니까 그냥 아무 키 값 사용 하였음
             Algorithm algorithm = Algorithm.HMAC256("rlaalswnrkgoTdma");
             token = JWT.create()
                     .withIssuer("gkdgo99")
@@ -79,13 +77,14 @@ public class UserService {
             return new UserLoginRespDto(false, "토큰 생성에 실패 하였습니다.");
         }
 
-        // 원래라면 DB 에 리프레시 토큰을 저장 해야함
+        // DB 에 리프레시 토큰을 저장 해야함
         // 나중에 갱신 할 때 DB 에 해당 리프레시 토큰과 엑세스 토큰이 같은지를 비교해서 해당 엑세스 토큰의 리프레시 토큰인지 확인을 해야함
         refreshTokenRepository.save(new RefreshToken(token, refreshToken));
 
         return new UserLoginRespDto(true, token, refreshToken, "로그인 성공");
     }
 
+    // 토큰 재발급
     public UserLoginRespDto verifyRefreshToken(String accessToken, String refreshToken) {
         DecodedJWT refresh_decode = null;
 
@@ -124,6 +123,7 @@ public class UserService {
     }
 
 
+    // 토큰 테스트
     public UserTokenRespDto tokenTest(String token)
     {
         DecodedJWT jwt;

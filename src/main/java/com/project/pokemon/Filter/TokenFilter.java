@@ -16,35 +16,36 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
-@Component
+@Component // 클래스에서 빈을 직접 등록 가능
 public class TokenFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
 
-        UserTokenRespDto tokenRespDto= null;
+        UserTokenRespDto tokenRespDto = null;
         String url = httpRequest.getRequestURI();
 
         // 로그인, 회원가입은 jwt 토큰 인증이 필요 없음
         if(url.startsWith("/comment") || url.startsWith("/like")) {
             String authorization = httpRequest.getHeader("Authorization");
 
+            // authorization이 null이거나 Bearer로 시작하지 않을 경우
             if(authorization == null || !authorization.startsWith("Bearer ")) {
-                // 에러 나는 부분
+                // 에러 처리
                 tokenRespDto  = new UserTokenRespDto(false, "토큰이 유효하지 않습니다.");
             }
 
             if(tokenRespDto == null) {
                 // 인증 성공 한 부분
-                String token = authorization.substring(7);
+                String token = authorization.substring(7); // substring 을 통해 Bearer 토큰의 앞부분을 잘라줌
 
                 DecodedJWT jwt = null;
 
-                try {
+                try { // JWT SHA256사용, 시크릿 키 : rlaalswnrkgoTdma <- 시크릿 키는 커스텀이지만 한 번 정하면 다른 곳에서도 동일 해야함
                     Algorithm algorithm = Algorithm.HMAC256("rlaalswnrkgoTdma"); //use more secure key
                     JWTVerifier verifier = JWT.require(algorithm)
-                            .withIssuer("gkdgo99")
+                            .withIssuer("gkdgo99") // 발급자
                             .build(); //Reusable verifier instance
 
                     jwt = verifier.verify(token);
