@@ -1,4 +1,4 @@
-package com.project.pokemon.Controller.Service;
+package com.project.pokemon.Service;
 
 import com.project.pokemon.model.TokenDecode;
 import com.project.pokemon.model.dto.requestDto.CommentsDto;
